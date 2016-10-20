@@ -1,5 +1,5 @@
 {
-  "name": "sean-api",
+  "name": "utown-queue-api",
   "version": "1.0.0",
   "description": "",
   "main": "bin/www",
@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sean-js/sean-api.git"
+    "url": "git+https://github.com/mauris/utown-queue-api.git"
   },
   "author": "Sam Yong",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sean-js/sean-api/issues"
+    "url": "https://github.com/mauris/utown-queue-api/issues"
   },
   "engines": {
     "node": "^6.0.0"
   },
-  "homepage": "https://github.com/sean-js/sean-api",
+  "homepage": "https://github.com/mauris/utown-queue-api",
   "dependencies": {
     "bluebird": "^3.4.3",
     "body-parser": "^1.15.2",
