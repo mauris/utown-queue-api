@@ -1,0 +1,60 @@
+{
+  "name": "sean-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/www",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean-js/sean-api.git"
+  },
+  "author": "Sam Yong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sean-js/sean-api/issues"
+  },
+  "engines": {
+    "node": "^6.0.0"
+  },
+  "homepage": "https://github.com/sean-js/sean-api",
+  "dependencies": {
+    "bluebird": "^3.4.3",
+    "body-parser": "^1.15.2",
+    "connect": "^3.4.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.2.0",
+    "del": "^2.2.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-flatten": "^0.3.1",
+    "gulp-if": "^2.0.1",
+    "gulp-ignore": "^2.0.1",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-util": "^3.0.7",
+    "helmet": "^2.2.0",
+    "jsonwebtoken": "^7.1.9",
+    "moment": "^2.14.1",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-beta5",
+    "require-dir": "^0.3.0",
+    "sequelize": "^3.24.3",
+    "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.1.0"
+  }
+}
