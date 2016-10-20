@@ -4,6 +4,7 @@ module.exports = (app) => {
   let API_PREFIX = "/v1";
 
   app.use(API_PREFIX + '/auth', require('./auth'));
+  app.use(API_PREFIX + '/groups', require('./groups'));
 
   app.use((req, res, next) => {
     if(req.accepts('json')) {
