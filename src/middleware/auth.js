@@ -1,6 +1,5 @@
 let models  = require('utown-queue-db');
 let Promise = require('bluebird');
-let bcrypt  = Promise.promisifyAll(require('bcryptjs'));
 let jwt     = Promise.promisifyAll(require('jsonwebtoken'));
 
 module.exports = (req, res, next) => {
