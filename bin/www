@@ -4,7 +4,6 @@ require('dotenv').config({ silent: true });
 const cluster = require('cluster');
 const debug = require('debug')('bin');
 const http = require('http');
-const models = require("../src/models/");
 const os = require('os');
 
 /**
@@ -27,14 +26,7 @@ if (cluster.isMaster && !process.env.SINGLE_THREAD) {
     console.log('[INFO] Worker ' + worker.process.pid + ' died');
   });
 
-  if (models && process.env.DB_SYNC) {
-    models.sequelize
-      .sync({logging: console.log})
-      .then(startApp);
-  } else {
-    console.log('[WARN] Starting app, but database not synchronized.');
-    startApp();
-  }
+  startApp();
 } else {
   console.log('[INFO] Worker %d #%d running!', cluster.worker.id, cluster.worker.process.pid);
   const server = require('../src/server');
