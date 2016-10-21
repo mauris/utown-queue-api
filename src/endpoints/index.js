@@ -9,7 +9,7 @@ module.exports = (app) => {
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', process.env.CORS_CLIENT_DOMAIN || '*');
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With');
+    res.header('Access-Control-Allow-Headers', 'Cache-Control, Pragma, Content-Type, X-Access-Token');
     if ('OPTIONS' === req.method) {
       return res.status(200).send();
     }
