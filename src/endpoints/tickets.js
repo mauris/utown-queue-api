@@ -6,7 +6,7 @@ const authChecker = require('../middleware/auth');
 module.exports = router;
 
 router.get('/', authChecker, (req, res, next) => {
-  req.event.getTickets()
+  req.event.getTickets({ where: { datetimeStart: null } })
     .then((tickets) => {
       res.json({
         status: 'ok',

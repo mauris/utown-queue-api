@@ -25,6 +25,7 @@ module.exports = (req, res, next) => {
       }
       req.event = event;
       next();
+      return null;
     })
     .catch((err) => {
       res
