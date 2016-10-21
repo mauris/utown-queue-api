@@ -1,16 +1,6 @@
-# SEAN Stack for API-based apps [![CI Status](https://travis-ci.org/sean-js/sean-api.svg?branch=master)](https://travis-ci.org/sean-js/sean-api)
+# UTown Queue API Application
 
-SEAN stands for Sequelize, ExpressJS, AngularJS and NodeJS.
-
-This repository serves the server/API-side of the stack, where you can use its advanced features to build really neat RESTful APIs. In fact, it can be used by any frontend application speaking JSON to the server application.
-
-- For NodeJS >= 6.0 only.
-- Easily configurable via environment variables (or using [dotenv](https://github.com/motdotla/dotenv))
-- Uses cluster for taking advantage of multi-core systems
-- Lean clean separation from front-end.
-- [JSON Web Tokens](https://jwt.io/) available for API authentication
-- Mocha + Chai HTTP for automated API testing and TDD.
-- [Sequelize](http://sequelizejs.com/) as ORM for supporting several RDBMS dialects.
+This app serves as the API-service application for the frontend application to help the queue managers track the status of the queue and call groups of people in the queue to the physical location when it is their turn. This app was made possible using the [SEAN Stack](https://github.com/sean-js).
 
 ## Commands
 
@@ -48,7 +38,6 @@ The stack can be configured using the a few environment variables. In the event 
 | --- | --- | --- | --- |
 | `NODE_ENV` | String | `'development'` | Description of the current runtime environment. On production, it should be set to `'production'` instead. |
 | `PORT` | Integer, 0 - 65535 | 3000 | The port number that the web server should listen to for incoming requests. |
-| `DB_SYNC` | Boolean | `false` | Whether Sequelize should synchronize models to database before starting the application. |
 | `DB_NAME` | String | `null` | The name of the database. |
 | `DB_USER` | String | `null` | The username for the database connection. |
 | `DB_PASS` | String | `null` | The password for the database connection. |
