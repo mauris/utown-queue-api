@@ -6,11 +6,12 @@ const authChecker = require('../middleware/auth');
 module.exports = router;
 
 router.get('/', authChecker, (req, res, next) => {
-  req.event.getGroups()
+  req.event.getGroups({ where: { datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }] })
     .then((groups) => {
       res.json({
         status: 'ok',
         result: groups
       });
-    })
+    });
+  return null;
 });
