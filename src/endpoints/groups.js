@@ -37,3 +37,18 @@ router.post('/:id/request', authChecker, (req, res, next) => {
     });
   return null;
 });
+
+router.post('/:id/start', authChecker, (req, res, next) => {
+  let groupId = req.params.id;
+  models.Group
+    .update(
+      { datetimeStart: models.sequelize.fn('NOW') },
+      { where: { groupId: groupId, eventId: req.event.eventId } }
+    )
+    .then(() => {
+      res.json({
+        'status': 'ok'
+      });
+    });
+  return null;
+});
