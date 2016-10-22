@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
     })
     .then((event) => {
       if (!event) {
-        throw new Error();
+        throw new Error('Event not found');
       }
       req.event = event;
       next();
