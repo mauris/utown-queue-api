@@ -18,6 +18,21 @@ router.get('/', authChecker, (req, res, next) => {
   return null;
 });
 
+router.post('/:id/markpresent', authChecker, (req, res, next) => {
+  let groupId = req.params.id;
+  models.Group
+    .update(
+      { isPresent: true },
+      { where: { groupId: groupId, eventId: req.event.eventId, datetimeStart: null } }
+    )
+    .then(() => {
+      res.json({
+        'status': 'ok'
+      });
+    });
+  return null;
+});
+
 router.post('/:id/request', authChecker, (req, res, next) => {
   let groupId = req.params.id;
   models.Group
