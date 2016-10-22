@@ -79,12 +79,11 @@ router.delete('/:id', authChecker, (req, res, next) => {
         return cancelTicket(ticket, t);
       })
       .then(() => {
-        return bot.sendMessage(_ticket.userId, "Hi " + _ticket.user.name + ", your ticket to " + req.event.eventName + " has been forfeited by the usher because your group did not fully turn up. You will need to rejoin the queue again.");
-      })
-      .then(() => {
+        bot.sendMessage(_ticket.userId, "Hi " + _ticket.user.name + ", your ticket to " + req.event.eventName + " has been forfeited by the usher because your group did not fully turn up. You will need to rejoin the queue again.");
         res.json({
           status: 'ok'
         });
+        return null;
       });
   })
   .catch((err) => {
