@@ -20,13 +20,12 @@ router.get('/', authChecker, (req, res, next) => {
 
 router.post('/:id/request', authChecker, (req, res, next) => {
   let groupId = req.params.id;
-  req.event.getGroups({ where: { groupId: groupId, datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }] })
-    .then((groups) => {
+  models.Group
+    .find({ where: { groupId: groupId, eventId: req.event.eventId, datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }] })
+    .then((group) => {
       var promises = [];
-      groups.forEach((group) => {
-        group.tickets.forEach((ticket) => {
-          promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon. Go over within the next 5 minutes, or else...\u{1F608}"));
-        });
+      group.tickets.forEach((ticket) => {
+        promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon. Go over within the next 5 minutes, or else...\u{1F608}"));
       });
       return Promise.all(promises);
     })
