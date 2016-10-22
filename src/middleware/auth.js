@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
     .then((decoded) => {
       return models.Event
         .find({
+          attributes: { exclude: ['secret'] },
           where: {
             eventCode: decoded.code,
             secret: decoded.secret
