@@ -20,6 +20,7 @@ module.exports = (app) => {
   app.use(API_PREFIX + '/auth', require('./auth'));
   app.use(API_PREFIX + '/groups', require('./groups'));
   app.use(API_PREFIX + '/tickets', require('./tickets'));
+  app.use(API_PREFIX + '/event', require('./event'));
 
   app.use((req, res, next) => {
     if(req.accepts('json')) {
