@@ -54,15 +54,28 @@ router.post('/:id/request', authChecker, (req, res, next) => {
 
 router.post('/:id/start', authChecker, (req, res, next) => {
   let groupId = req.params.id;
-  models.Group
-    .update(
-      { datetimeStart: models.sequelize.fn('NOW') },
-      { where: { groupId: groupId, eventId: req.event.eventId } }
-    )
-    .then(() => {
-      res.json({
-        'status': 'ok'
+  models.sequelize.transaction((t) => {
+    return models.Group
+      .update(
+        { datetimeStart: models.sequelize.fn('NOW') },
+        { where: { groupId: groupId, eventId: req.event.eventId, datetimeStart: null }, transaction: t }
+      )
+      .then(() => {
+        return Promise.all([
+          models.Ticket.update({ isActive: false }, { where: { groupId: groupId, eventId: req.event.eventId }, transaction: t }),
+          models.Ticket.findAll({ where: { groupId: groupId, eventId: req.event.eventId }, include: [{ model: models.User, as: 'user' }], transaction: t })
+            .then((tickets) => {
+              return Promise.map(tickets, (ticket) => {
+                return ticket.user.update({ isInQueue: false }, { transaction: t });
+              });
+            })
+        ]);
+      })
+      .then(() => {
+        res.json({
+          'status': 'ok'
+        });
       });
-    });
+  });
   return null;
 });
