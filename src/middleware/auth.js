@@ -3,7 +3,7 @@ let Promise = require('bluebird');
 let jwt     = Promise.promisifyAll(require('jsonwebtoken'));
 
 module.exports = (req, res, next) => {
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  var token = req.body.token || req.query.token || req.headers['authorization'];
   if (!token) {
     return res
       .status(403)
