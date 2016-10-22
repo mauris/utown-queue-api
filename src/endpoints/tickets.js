@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('utown-queue-db');
 const authChecker = require('../middleware/auth');
+const bot = require('../bot');
 
 module.exports = router;
 
@@ -52,4 +53,37 @@ router.get('/', authChecker, (req, res, next) => {
         result: tickets
       });
     })
+});
+
+router.delete('/:id', authChecker, (req, res, next) => {
+  let ticketId = req.params.id;
+  let _ticket = null;
+  models.sequelize.transaction((t) => {
+    models.Ticket
+      .find({
+        where: { ticketId: ticketId, eventId: req.event.eventId },
+        include: [
+          { model: models.Group, as: 'group', required: false }
+        ],
+        transaction: t
+      })
+      .then((ticket) => {
+        if (!ticket) {
+          throw new Error('Ticket not found');
+        }
+        _ticket = ticket;
+        if (ticket.group) {
+          return updateGroupAndCancelTicket(ticket.group, ticket, t);
+        }
+        return cancelTicket(ticket, t);
+      })
+      .then(() => {
+        return bot.sendMessage(_ticket.userId, "Hi " + ticket.user.name + ", your ticket to " + req.event.eventName + " has been forfeited by the usher because your group did not fully turn up. You will need to rejoin the queue again.");
+      })
+      .then(() => {
+        res.json({
+          status: 'ok'
+        });
+      });
+  });
 });
