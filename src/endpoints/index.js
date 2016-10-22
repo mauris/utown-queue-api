@@ -17,6 +17,15 @@ module.exports = (app) => {
     next();
   });
 
+  app.use((req, res, next) => {
+    // overriding res.json so that we can send text/plain for cross origin requests
+    res.json = (obj) => {
+      res.set("Content-Type", "text/plain");
+      return res.status(200).send(JSON.stringify(obj));
+    };
+    next();
+  })
+
   app.use(API_PREFIX + '/auth', require('./auth'));
   app.use(API_PREFIX + '/groups', require('./groups'));
   app.use(API_PREFIX + '/tickets', require('./tickets'));
