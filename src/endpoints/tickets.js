@@ -46,7 +46,7 @@ let updateGroupAndCancelTicket = (group, ticket, transaction) => {
 };
 
 router.get('/', authChecker, (req, res, next) => {
-  req.event.getTickets({ where: { datetimeStart: null }, include: [{ model: models.User, as: 'user' }] })
+  req.event.getTickets({ where: { groupId: null }, include: [{ model: models.User, as: 'user' }] })
     .then((tickets) => {
       res.json({
         status: 'ok',
