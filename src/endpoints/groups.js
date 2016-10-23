@@ -40,7 +40,7 @@ router.post('/:id/request', authChecker, (req, res, next) => {
     .then((group) => {
       var promises = [];
       group.tickets.forEach((ticket) => {
-        promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon. Go over within the next 5 minutes, or else...\u{1F608}"));
+        promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon. Reach the entrance within the next 5 minutes, or else...\u{1F608}"));
       });
       return Promise.all(promises);
     })
