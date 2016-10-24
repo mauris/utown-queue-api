@@ -64,12 +64,16 @@ router.post('/:id/start', authChecker, (req, res, next) => {
         return Promise.all([
           models.Ticket.update({ isActive: false }, { where: { groupId: groupId, eventId: req.event.eventId }, transaction: t }),
           models.Ticket.findAll({ where: { groupId: groupId, eventId: req.event.eventId }, include: [{ model: models.User, as: 'user' }], transaction: t })
-            .then((tickets) => {
-              return Promise.map(tickets, (ticket) => {
-                return ticket.user.update({ isInQueue: false }, { transaction: t });
-              });
-            })
         ]);
+      })
+      .spread((updateResult, tickets) => {
+        var promises = [];
+        tickets.forEach((ticket) => {
+          promises.push(bot.sendMessage(ticket.userId, "" + ticket.user.name + ", thanks for waiting patiently for your to " + req.event.eventName + ". I hope you enjoyed the experience. If you would like give some feedback on the event, feel free to write in at <insert link here>."));
+          promises.push(ticket.user.update({ isInQueue: false }, { transaction: t }));
+        });
+
+        return Promise.all(promises);
       })
       .then(() => {
         res.json({
