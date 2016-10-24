@@ -69,7 +69,7 @@ router.post('/:id/start', authChecker, (req, res, next) => {
       .spread((updateResult, tickets) => {
         var promises = [];
         tickets.forEach((ticket) => {
-          promises.push(bot.sendMessage(ticket.userId, "" + ticket.user.name + ", thanks for waiting patiently for your to " + req.event.eventName + ". I hope you enjoyed the experience. If you would like give some feedback on the event, feel free to write in at <insert link here>."));
+          promises.push(bot.sendMessage(ticket.userId, "" + ticket.user.name + ", thanks for waiting patiently for your turn to " + req.event.eventName + ". I hope you enjoyed the experience. If you would like give some feedback on the event, feel free to write in at <insert link here>."));
           promises.push(ticket.user.update({ isInQueue: false }, { transaction: t }));
         });
 
