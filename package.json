@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mauris/utown-queue-api",
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "bluebird": "^3.4.3",
     "body-parser": "^1.15.2",
     "connect": "^3.4.1",
