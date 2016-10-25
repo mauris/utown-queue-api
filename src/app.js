@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const router = require('./endpoints');
-require('./daemon');
 
 const app = express();
 

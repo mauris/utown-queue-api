@@ -12,7 +12,8 @@ const os = require('os');
 
 var port = normalizePort(process.env.PORT || 3000);
 
-if (cluster.isMaster && !process.env.SINGLE_THREAD) {
+if (cluster.isMaster) {
+  require('../src/daemon');
   let startApp = () => {
     let cpuCount = os.cpus().length;
 
