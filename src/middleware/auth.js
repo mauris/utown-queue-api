@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
         .find({
           attributes: { exclude: ['secret'] },
           where: {
-            eventCode: decoded.code,
+            eventId: decoded.eventId,
             secret: decoded.secret
           }
         });
