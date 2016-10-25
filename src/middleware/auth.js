@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   if (!token) {
     return res
       .status(403)
-      .json({ "error": "Authentication Failed." });
+      .json({ "status": "error", "msg": "Authentication Failed" });
   }
   let secret = null;
   jwt.verifyAsync(token, process.env.API_AUTH_SECRET)
@@ -34,10 +34,8 @@ module.exports = (req, res, next) => {
       return null;
     })
     .catch((err) => {
-      res
+      return res
         .status(403)
-        .json({
-          "error": "Authentication failed."
-        });
+        .json({ "status": "error", "msg": "Authentication Failed" });
     });
 };
