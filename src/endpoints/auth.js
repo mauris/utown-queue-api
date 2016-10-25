@@ -6,10 +6,10 @@ const jwt = require('jsonwebtoken');
 module.exports = router;
 
 router.post('/request', (req, res, next) => {
-  let eventCode = req.body.code;
+  let eventId = req.body.id;
   let secret = req.body.secret;
 
-  var token = jwt.sign({code: eventCode, secret: secret}, process.env.API_AUTH_SECRET, {
+  var token = jwt.sign({eventId: eventId, secret: secret}, process.env.API_AUTH_SECRET, {
     "expiresIn": '1d'
   });
   res.json({status: 'ok', token: token});
