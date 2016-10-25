@@ -33,7 +33,7 @@ router.post('/:id/markpresent', authChecker, (req, res, next) => {
   return null;
 });
 
-router.post('/:id/request', authChecker, (req, res, next) => {
+router.post('/:id/call', authChecker, (req, res, next) => {
   let groupId = req.params.id;
   models.Group
     .find({ where: { groupId: groupId, eventId: req.event.eventId, datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }] })
