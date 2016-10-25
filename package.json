@@ -47,6 +47,7 @@
     "morgan": "^1.7.0",
     "node-telegram-bot-api": "^0.24.0",
     "pug": "^2.0.0-beta5",
+    "randomstring": "^1.1.5",
     "require-dir": "^0.3.0",
     "sequelize": "^3.24.3",
     "serve-favicon": "^2.3.0",
