@@ -15,11 +15,11 @@ module.exports = (req, res, next) => {
     .then((decoded) => {
       secret = decoded.secret;
       return models.Event
-        .find({
-          attributes: { exclude: ['secret'] },
+        .findOne({
           where: {
             eventId: decoded.eventId
-          }
+          },
+          raw: true
         });
     })
     .then((event) => {
@@ -29,6 +29,7 @@ module.exports = (req, res, next) => {
       if (!bcrypt.compareSync(secret, event.secret)) {
         throw new Error('Secret is wrong');
       }
+      delete event.secret;
       req.event = event;
       next();
       return null;
