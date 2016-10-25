@@ -22,7 +22,7 @@ module.exports = (app) => {
     // overriding res.json so that we can send text/plain for cross origin requests
     res.json = (obj) => {
       res.set("Content-Type", "text/plain");
-      return res.status(200).send(JSON.stringify(obj));
+      return res.send(JSON.stringify(obj));
     };
     next();
   })
