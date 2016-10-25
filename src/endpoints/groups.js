@@ -8,7 +8,13 @@ const Promise = require('bluebird');
 module.exports = router;
 
 router.get('/', authChecker, (req, res, next) => {
-  req.event.getGroups({ where: { datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }] })
+  models.Group
+    .findAll({
+      where: { datetimeStart: null, eventId: req.event.eventId },
+      include: [
+        { model: models.Ticket, as: 'tickets', include: [{ model: models.User, as: 'user' }] }
+      ]
+    })
     .then((groups) => {
       res.json({
         status: 'ok',
