@@ -5,7 +5,7 @@ var randomstring = require("randomstring");
 console.log('Daemon worker #' + process.pid + ' started.');
 
 let $controller = () => {
-  return models.sequelize.query("UPDATE Events SET eventCode = SUBSTRING(conv(floor(rand() * 99999999999 * eventId), 20, 36), 1, 4);")
+  return models.sequelize.query("UPDATE Events SET datetimeCodeLastUpdated = NOW(), eventCode = SUBSTRING(conv(floor(rand() * 99999999999 * eventId), 20, 36), 1, 4);")
 };
 
 $controller();
