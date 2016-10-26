@@ -47,7 +47,7 @@ router.post('/:id/call', authChecker, (req, res, next) => {
       var promises = [];
       promises.push(group.update({ datetimeLastCalled: models.sequelize.fn('NOW'), callCount: models.sequelize.literal('callCount + 1') }));
       group.tickets.forEach((ticket) => {
-        promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon. Reach the entrance within the next 5 minutes, or else...\u{1F608}"));
+        promises.push(bot.sendMessage(ticket.userId, "Hi " + ticket.user.name + ", your turn to " + req.event.eventName + " will be starting soon.\n\nReach the entrance within the next 5 minutes, or else...\u{1F608}\n\nWhen your group arrives at the entrance, show the usher your group number #" + group.groupId));
       });
       return Promise.all(promises);
     })
