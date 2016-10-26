@@ -9,7 +9,7 @@ let $controller = () => {
     .findAll({})
     .then((events) => {
       return Promise.map(events, (event) => {
-        return event.getGroups({ where: { datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets' }] })
+        return event.getGroups({ where: { isPresent: false, datetimeStart: null }, include: [{ model: models.Ticket, as: 'tickets' }] })
           .then((groups) => {
             var promises = [];
             var count = 0;
