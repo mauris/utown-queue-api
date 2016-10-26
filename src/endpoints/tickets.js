@@ -47,7 +47,7 @@ let updateGroupAndCancelTicket = (group, ticket, transaction) => {
 
 router.get('/', authChecker, (req, res, next) => {
   models.Ticket
-    .findALl({
+    .findAll({
       where: { eventId: req.event.eventId, isActive: true, groupId: null },
       include: [{ model: models.User, as: 'user' }]
     })
