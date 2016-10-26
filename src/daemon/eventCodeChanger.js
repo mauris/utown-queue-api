@@ -9,4 +9,4 @@ let $controller = () => {
 };
 
 $controller();
-setInterval($controller, 300000);
+setInterval($controller, 60000);
