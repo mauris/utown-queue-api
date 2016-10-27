@@ -76,7 +76,7 @@ router.post('/:id/start', authChecker, (req, res, next) => {
       .spread((updateResult, tickets) => {
         var promises = [];
         tickets.forEach((ticket) => {
-          promises.push(bot.sendMessage(ticket.userId, "" + ticket.user.name + ", thanks for waiting patiently for your turn to " + req.event.eventName + ". I hope you enjoyed the experience. If you would like give some feedback on the event, feel free to write in at <insert link here>."));
+          promises.push(bot.sendMessage(ticket.userId, "Thanks for waiting patiently for your turn to " + req.event.eventName + ".\n\nI hope you enjoy the experience.\n\nIf you would like to thank the volunteers or there are ways we can improve, feel free to let me know using the form at https://tinyurl.com/UTHalloween16", { parse_mode: 'Markdown', disable_web_page_preview: true }));
           promises.push(ticket.user.update({ isInQueue: false }, { transaction: t }));
         });
 
